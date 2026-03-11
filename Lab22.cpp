@@ -135,6 +135,20 @@ public:
         delete temp;
     }
 
+    // added pop_front method
+    void pop_front() {
+        if (!head)
+            return;
+        
+        Node* temp = head;
+        head = head->next;
+        if (head)
+            head->prev = nullptr;
+        else
+            tail = nullptr;
+        delete temp;
+    }
+
     void print() {
         Node* current = head;
         if (!current) return;
