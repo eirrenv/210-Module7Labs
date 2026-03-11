@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <random> // for random numbers
 
 using namespace std;
 const int SIZE = 3;
@@ -11,16 +12,17 @@ private:
 public:
     // constructors
     Chair() {
+        srand(time(0)); // RNG start
         prices = new double[SIZE];
-        legs = 0;
+        legs = rand() % (4-3+1) + 3;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = rand() % (99999 - 10000 + 1) + 10000 / (double) 100; // random numbers between 100 and 999.99
     }
-    Chair(int l) {
+    Chair(int l, double priceArr[]) { // added array as second parameter
         prices = new double[SIZE];
         legs = l;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = priceArr[i]; // setting prices[i] to array
     }
 
     // setters and getters
