@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <random> // for random numbers
+#include <ctime> // for time
 
 using namespace std;
 const int SIZE = 3;
@@ -12,11 +13,10 @@ private:
 public:
     // constructors
     Chair() {
-        srand(time(0)); // RNG start
         prices = new double[SIZE];
         legs = rand() % (4-3+1) + 3;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = rand() % (99999 - 10000 + 1) + 10000 / (double) 100; // random numbers between 100 and 999.99
+            prices[i] = rand() % ((99999 - 10000 + 1) + 10000) / (double) 100; // random numbers between 100 and 999.99
     }
     Chair(int l, double priceArr[]) { // added array as second parameter
         prices = new double[SIZE];
@@ -51,6 +51,7 @@ public:
 };
 
 int main() {
+    srand(time(0)); // RNG start
     cout << fixed << setprecision(2);
 
     //creating pointer to first chair object
@@ -60,20 +61,18 @@ int main() {
     chairPtr->print();
 
     //creating dynamic chair object with constructor
-    Chair *livingChair = new Chair(3);
-    livingChair->setPrices(525.25, 434.34, 252.52);
+    double priceArr[SIZE]; // creating new priceArr array for parameter constructor, filling with random values
+    for (int i = 0; i < SIZE; ++i) {
+        priceArr[i] = rand() % ((99999 - 10000 + 1) + 10000) / (double) 100;
+    }
+
+    Chair *livingChair = new Chair(3, priceArr);
     livingChair->print();
     delete livingChair;
     livingChair = nullptr;
 
     //creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
-    collection[0].setLegs(4);
-    collection[0].setPrices(441.41, 552.52, 663.63);
-    collection[1].setLegs(4);
-    collection[1].setPrices(484.84, 959.59, 868.68);
-    collection[2].setLegs(4);
-    collection[2].setPrices(626.26, 515.15, 757.57);
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
     
