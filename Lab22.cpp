@@ -76,7 +76,7 @@ public:
         temp->next = newNode;
     }
 
-    void delete_node(int value) {
+    void delete_val(int value) { // updated delete_node name
         if (!head) return; // Empty list
 
         Node* temp = head;
@@ -146,6 +146,23 @@ public:
             head->prev = nullptr;
         else
             tail = nullptr;
+
+        delete temp;
+    }
+
+    // added pop_back method
+    void pop_back() {
+        if (!tail) 
+            return;
+        
+        Node* temp = tail;
+        tail = tail->prev;
+
+        if (tail)
+            tail->next = nullptr;
+        else   
+            head = nullptr;
+
         delete temp;
     }
 
