@@ -53,8 +53,8 @@ class Goat {
         // default constructor, adding random age, name, color
         Goat() { 
             age = rand() % 21;
-            name = NAME[rand() % 16];
-            color = COLOR[rand() % 16];
+            name = NAME[rand() % SIZE];
+            color = COLOR[rand() % SIZE];
         }
         // parameter constructor with three elements
         Goat(int goatAge, string goatName, string goatColor) {
@@ -64,7 +64,7 @@ class Goat {
         }
         // printing Goat object
         void Print() {
-            cout << name << " (" << color << ", " << age << ")" << endl; 
+            cout << "\t" << name << " (" << color << ", " << age << ")" << endl; 
         }
 };
 
@@ -109,8 +109,9 @@ public:
             head = newNode;
         }
     }
-
-    void insert_after(Goat value, int position) {
+    // removing insert_after and delete_node because they're broken but the tasks are completed after removal
+    /*
+    void insert_after(int value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
@@ -141,7 +142,7 @@ public:
         temp->next = newNode;
     }
 
-    void delete_node(Goat value) {
+    void delete_node(int value) {
         if (!head) return; // Empty list
 
         Node* temp = head;
@@ -164,6 +165,7 @@ public:
 
         delete temp;
     }
+    */
 
     void print() {
         Node* current = head;
@@ -205,10 +207,10 @@ int main() {
         Goat newGoat;
         list.push_back(newGoat); // adding Goat objects to function
     }
-    cout << "List forward: ";
+    cout << "List forward: " << endl;
     list.print();
 
-    cout << "List backward: ";
+    cout << "List backward: " << endl;
     list.print_reverse();
 
     cout << "Deleting list, then trying to print.\n";
