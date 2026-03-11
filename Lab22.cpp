@@ -100,6 +100,41 @@ public:
         delete temp;
     }
 
+    // added delete_pos() method
+    void delete_pos(int position) {
+        if (position < 0) {
+            cout << "Position must be >= 0." << endl;
+            return;
+        }
+        if (!head) {
+            cout << "List empty." << endl;
+            return;
+        }
+        Node* temp = head;
+
+        int start = 0; // starting position
+        while (temp && start != position) { // iterate through linked list to find position
+            temp = temp->next;
+            ++start;
+        }
+
+        if (!temp) return; // Value not found
+
+        if (temp->prev) {
+            temp->prev->next = temp->next;
+        } else {
+            head = temp->next; // Deleting the head
+        }
+
+        if (temp->next) {
+            temp->next->prev = temp->prev;
+        } else {
+            tail = temp->prev; // Deleting the tail
+        }
+
+        delete temp;
+    }
+
     void print() {
         Node* current = head;
         if (!current) return;
