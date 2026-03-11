@@ -56,20 +56,25 @@ class Goat {
             name = NAME[rand() % 16];
             color = COLOR[rand() % 16];
         }
+        // parameter constructor with three elements
         Goat(int goatAge, string goatName, string goatColor) {
             age = goatAge;
             name = goatName;
             color = goatColor;
+        }
+        // printing Goat object
+        void Print() {
+            cout << name << " (" << color << ", " << age << ")" << endl; 
         }
 };
 
 class DoublyLinkedList {
 private:
     struct Node {
-        int data;
+        Goat data;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
+        Node(Goat val, Node* p = nullptr, Node* n = nullptr) {
             data = val; 
             prev = p;
             next = n;
@@ -83,8 +88,8 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void push_back(int value) {
-        Node* newNode = new Node(value);
+    void push_back(Goat newGoat) {
+        Node* newNode = new Node(newGoat);
         if (!tail)  // if there's no tail, the list is empty
             head = tail = newNode;
         else {
@@ -94,8 +99,8 @@ public:
         }
     }
 
-    void push_front(int value) {
-        Node* newNode = new Node(value);
+    void push_front(Goat newGoat) {
+        Node* newNode = new Node(newGoat);
         if (!head)  // if there's no head, the list is empty
             head = tail = newNode;
         else {
@@ -105,7 +110,7 @@ public:
         }
     }
 
-    void insert_after(int value, int position) {
+    void insert_after(Goat value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
@@ -136,7 +141,7 @@ public:
         temp->next = newNode;
     }
 
-    void delete_node(int value) {
+    void delete_node(Goat value) {
         if (!head) return; // Empty list
 
         Node* temp = head;
@@ -164,7 +169,7 @@ public:
         Node* current = head;
         if (!current) return;
         while (current) {
-            cout << current->data << " ";
+            current->data.Print(); // edited to use Goat Print() function
             current = current->next;
         }
         cout << endl;
@@ -174,7 +179,7 @@ public:
         Node* current = tail;
         if (!current) return;
         while (current) {
-            cout << current->data << " ";
+            current->data.Print(); // edited to use Goat Print() function
             current = current->prev;
         }
         cout << endl;
@@ -191,12 +196,15 @@ public:
 
 // Driver program
 int main() {
-    srand(time(0));
+    srand(time(0)); // starting RNG
+
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
-    for (int i = 0; i < size; ++i)
-        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    for (int i = 0; i < size; ++i) {
+        Goat newGoat;
+        list.push_back(newGoat); // adding Goat objects to function
+    }
     cout << "List forward: ";
     list.print();
 
