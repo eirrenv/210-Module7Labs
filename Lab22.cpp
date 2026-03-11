@@ -1,4 +1,7 @@
 #include <iostream>
+// for true RNG
+#include <random>
+#include <ctime>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -197,6 +200,8 @@ public:
 
 // Driver program
 int main() {
+    srand(time(0)); // added true RNG
+
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
@@ -207,6 +212,12 @@ int main() {
 
     cout << "List backward: ";
     list.print_reverse();
+
+    // testing delete_pos
+    int randPos = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    cout << "Deleting list at random position: " << randPos << ", then printing: ";
+    list.delete_pos(randPos);
+    list.print();
 
     cout << "Deleting list, then trying to print.\n";
     list.~DoublyLinkedList();
