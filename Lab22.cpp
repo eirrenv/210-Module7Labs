@@ -205,18 +205,37 @@ int main() {
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
-    for (int i = 0; i < size; ++i)
-        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    int newVal;
+    for (int i = 0; i < size; ++i) {
+        newVal = rand() % (MAX_NR-MIN_NR+1) + MIN_NR;
+        list.push_back(newVal);
+    }
+
     cout << "List forward: ";
     list.print();
 
     cout << "List backward: ";
     list.print_reverse();
 
+    // testing delete_val
+    cout << "Deleting value: " << newVal << endl;
+    list.delete_val(newVal);
+    list.print();
+
     // testing delete_pos
-    int randPos = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    int randPos = rand() % (size - MIN_LS + 1) + MIN_LS;
     cout << "Deleting list at random position: " << randPos << ", then printing: ";
     list.delete_pos(randPos);
+    list.print();
+
+    // testing pop_front()
+    cout << "Deleting front of list: " << endl;
+    list.pop_front();
+    list.print();
+
+    // testing pop_back()
+    cout << "Deleting end of list: " << endl;
+    list.pop_back();
     list.print();
 
     cout << "Deleting list, then trying to print.\n";
