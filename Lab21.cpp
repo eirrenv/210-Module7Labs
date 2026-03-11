@@ -1,7 +1,67 @@
 #include <iostream>
+// including random and ctime for true randomness
+#include <random>
+#include <ctime>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
+const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20, SIZE = 15; // added SIZE for array sizes
+
+// Goat class
+class Goat {
+    private:
+        int age;
+        string name;
+        string color;
+        // constant string of goat names to choose from, by ChatGPT
+        string NAME[SIZE] = {
+            "Billy",
+            "Daisy",
+            "Pepper",
+            "Maple",
+            "Nibbles",
+            "Clover",
+            "Rocky",
+            "Luna",
+            "Biscuit",
+            "Hazel",
+            "Oreo",
+            "Willow",
+            "Scout",
+            "Juniper",
+            "Mochi"
+        }; 
+        // const string of goat colors, by ChatGPT
+        string COLOR[SIZE] = {
+            "White",
+            "Brown",
+            "Black",
+            "Gray",
+            "Spotted",
+            "Tan",
+            "Cream",
+            "Golden",
+            "Black and White",
+            "Chocolate",
+            "Silver",
+            "Rust",
+            "Speckled",
+            "Amber",
+            "Charcoal"
+        };
+    
+    public:
+        // default constructor, adding random age, name, color
+        Goat() { 
+            age = rand() % 21;
+            name = NAME[rand() % 16];
+            color = COLOR[rand() % 16];
+        }
+        Goat(int goatAge, string goatName, string goatColor) {
+            age = goatAge;
+            name = goatName;
+            color = goatColor;
+        }
+};
 
 class DoublyLinkedList {
 private:
@@ -131,6 +191,7 @@ public:
 
 // Driver program
 int main() {
+    srand(time(0));
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
